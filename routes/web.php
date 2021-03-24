@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Test;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Frontpage;
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +17,35 @@ use App\Http\Livewire\Frontpage;
 
 Route::get('/welcome', function () {
     return view('welcome');
+});
+Route::get('/runserver', function () {
+
+    // Artisan::call('make:controller Test');
+    // $output = Artisan::output();
+    // $output = shell_exec("php artisan serve");
+
+    // $data['output'] = shell_exec( '(cd '. base_path() .'ls)' );
+    // $data['output'] = shell_exec( " pwd " );
+    // Artisan::call('serve');
+    // $output = shell_exec("cd .. ; pwd");
+    $output['output']  = shell_exec('git pull origin master');
+    // $output = shell_exec('cd.');
+    // $data['output'] = shell_exec( '(cd '. base_path() .' && git pull origin master)' );
+        // dd( '('. base_path() .' php artisan serve)' );
+
+    dd($output);
+    // Artisan::call('mail:send 1 --queue=default');
+
+    // dd("Cache is cleared");
+
+
+
+    // $cmd = 'php '.base_path().'/php artisan serve';
+// $export = shell_exec('ls');
+dd($data);
+
+    
+    
 });
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -34,3 +65,4 @@ Route::group(['middleware' =>[
 
 Route::get('/{ urlslug }', Frontpage::class);
 Route::get('/', Frontpage::class);
+Route::get('/gitpull', [Test::class, 'gitpull']);
